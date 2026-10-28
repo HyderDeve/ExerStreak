@@ -1,0 +1,17 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+@theme {
+  --color-cream: #fff6ee;
+  --color-peach: #ffebdb;
+  --color-peach-deep: #ffdcc2;
+  --color-line: #fce3cf;
+  --color-brand: #f97316;
+  --color-brand-soft: #fdba74;
+  --color-ink: #8f3a12;
+  --color-body: #a15a38;
+  --color-faint: #c48466;
+}

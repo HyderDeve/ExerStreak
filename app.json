@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "exerstreak",
+    "slug": "exerstreak",
+    "version": "1.0.0",
+    "scheme": "exerstreak",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#fff6ee",
+    "ios": { "supportsTablet": false },
+    "android": { "backgroundColor": "#fff6ee" },
+    "plugins": ["expo-router"]
+  }
+}
