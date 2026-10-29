@@ -1,6 +1,6 @@
 import AppButton from "@/components/AppButton";
 import FormField from "@/components/FormField";
-import Logo from "@/components/Logo";
+import Logo from "@/components/logo";
 import RadioCard from "@/components/RadioCard";
 import SegmentedControl from "@/components/SegmentedControl";
 import { BODY_TYPES } from "@/constants/data";
