@@ -5,13 +5,386 @@
 @import "nativewind/theme";
 
 @theme {
-  --color-cream: #fff6ee;
-  --color-peach: #ffebdb;
-  --color-peach-deep: #ffdcc2;
-  --color-line: #fce3cf;
-  --color-brand: #f97316;
-  --color-brand-soft: #fdba74;
-  --color-ink: #8f3a12;
-  --color-body: #a15a38;
-  --color-faint: #c48466;
+    --color-background: #fff6ee;
+    --color-foreground: #8f3a12;
+    --color-card: #ffffff;
+    --color-muted: #ffebdb;
+    --color-muted-foreground: #a15a38;
+    --color-faint: #c48466;
+    --color-primary: #f97316;
+    --color-primary-soft: #fdba74;
+    --color-accent: #ffdcc2;
+    --color-border: #fce3cf;
+    --color-success: #16a34a;
+    --color-destructive: #dc2626;
+
+    --font-sans: sans-regular;
+    --font-sans-light: sans-light;
+    --font-sans-medium: sans-medium;
+    --font-sans-semibold: sans-semibold;
+    --font-sans-bold: sans-bold;
+    --font-sans-extrabold: sans-extrabold;
+}
+
+/* ---------- Tab bar ---------- */
+@utility tabs-icon {
+    @apply size-12 items-center justify-center;
+}
+@utility tabs-pill {
+    @apply size-12 items-center justify-center rounded-full bg-transparent;
+}
+@utility tabs-active {
+    @apply bg-primary;
+}
+
+/* ---------- Shared ---------- */
+@utility screen {
+    @apply flex-1 bg-background px-5 pt-5;
+}
+@utility screen-title {
+    @apply text-3xl font-sans-bold tracking-tight text-foreground;
+}
+@utility screen-subtitle {
+    @apply mt-1 text-sm font-sans-medium text-muted-foreground;
+}
+@utility back-row {
+    @apply flex-row items-center gap-1;
+}
+@utility back-text {
+    @apply text-sm font-sans-medium text-foreground;
+}
+@utility pill {
+    @apply flex-row items-center gap-1 rounded-full bg-muted px-3 py-1.5;
+}
+@utility pill-text {
+    @apply text-xs font-sans-semibold text-primary;
+}
+@utility eyebrow {
+    @apply text-xs font-sans-semibold uppercase tracking-[1px] text-muted-foreground;
+}
+@utility empty-state {
+    @apply py-4 text-sm font-sans-medium text-muted-foreground;
+}
+@utility footer-note {
+    @apply mt-3 text-center text-xs font-sans-medium text-muted-foreground;
+}
+
+/* ---------- Home ---------- */
+@utility home-header {
+    @apply mb-2 flex-row items-center justify-between;
+}
+@utility logo-row {
+    @apply flex-row items-center gap-2;
+}
+@utility logo-text {
+    @apply text-xl font-sans-medium tracking-tight text-foreground;
+}
+@utility home-avatar {
+    @apply size-9 items-center justify-center overflow-hidden rounded-full bg-muted;
+}
+@utility home-avatar-text {
+    @apply text-sm font-sans-bold text-primary;
+}
+@utility home-date {
+    @apply mt-5 text-xs font-sans-medium uppercase text-muted-foreground;
+}
+@utility home-title {
+    @apply mt-1 text-3xl font-sans-extrabold tracking-tight text-foreground;
+}
+
+/* ---------- Streak ---------- */
+@utility streak-card {
+    @apply my-5 rounded-3xl bg-muted p-5;
+}
+@utility streak-top {
+    @apply flex-row items-start justify-between;
+}
+@utility streak-label {
+    @apply text-xs font-sans-bold uppercase tracking-[0.5px] text-primary;
+}
+@utility streak-count-row {
+    @apply mt-1 flex-row items-baseline gap-2;
+}
+@utility streak-count {
+    @apply text-5xl font-sans-extrabold text-foreground;
+}
+@utility streak-unit {
+    @apply text-xl font-sans-medium text-muted-foreground;
+}
+@utility streak-flame {
+    @apply size-14 items-center justify-center rounded-full bg-background;
+}
+@utility streak-days {
+    @apply mt-5 flex-row justify-between;
+}
+@utility streak-day {
+    @apply items-center gap-2;
+}
+@utility streak-day-letter {
+    @apply text-[11px] font-sans-medium text-muted-foreground;
+}
+@utility streak-dot {
+    @apply size-8 items-center justify-center rounded-full border border-primary-soft bg-background;
+}
+@utility streak-dot-done {
+    @apply border-primary bg-primary;
+}
+@utility streak-dot-today {
+    @apply border-primary;
+}
+@utility streak-dot-text {
+    @apply text-[11px] font-sans-bold text-primary;
+}
+@utility streak-hint {
+    @apply mt-4 text-xs font-sans-medium text-primary;
+}
+
+/* ---------- Lists / routines ---------- */
+@utility list-head {
+    @apply mb-3 mt-2 flex-row items-center justify-between;
+}
+@utility list-title {
+    @apply text-xl font-sans-bold text-foreground;
+}
+@utility list-meta {
+    @apply text-xs font-sans-medium text-muted-foreground;
+}
+@utility progress-track {
+    @apply h-1.5 overflow-hidden rounded-full bg-accent;
+}
+@utility progress-fill {
+    @apply h-full rounded-full bg-primary;
+}
+@utility routine-card {
+    @apply flex-row items-center gap-4 rounded-2xl border border-border bg-card p-4;
+}
+@utility routine-icon {
+    @apply size-11 items-center justify-center rounded-xl bg-muted;
+}
+@utility routine-copy {
+    @apply min-w-0 flex-1;
+}
+@utility routine-title {
+    @apply text-base font-sans-bold text-foreground;
+}
+@utility routine-meta {
+    @apply mt-0.5 text-xs font-sans-medium text-muted-foreground;
+}
+@utility routine-status {
+    @apply text-xs font-sans-bold text-primary;
+}
+
+/* ---------- Routine detail ---------- */
+@utility detail-title {
+    @apply mt-1 text-4xl font-sans-extrabold tracking-tight text-foreground;
+}
+@utility detail-copy {
+    @apply mt-2 text-sm font-sans-medium text-muted-foreground;
+}
+@utility detail-meta {
+    @apply mt-2 flex-row items-center gap-1.5;
+}
+@utility detail-meta-text {
+    @apply text-xs font-sans-medium text-muted-foreground;
+}
+@utility progress-card {
+    @apply mt-5 rounded-2xl bg-muted p-4;
+}
+@utility progress-card-row {
+    @apply mb-3 flex-row items-center justify-between;
+}
+@utility progress-card-title {
+    @apply text-sm font-sans-bold text-primary;
+}
+@utility exercise-row {
+    @apply flex-row items-center gap-3 border-b border-border py-4;
+}
+@utility exercise-copy {
+    @apply min-w-0 flex-1;
+}
+@utility exercise-name {
+    @apply text-base font-sans-semibold text-foreground;
+}
+@utility exercise-hint {
+    @apply mt-0.5 text-xs font-sans-medium text-muted-foreground;
+}
+@utility exercise-time {
+    @apply text-sm font-sans-semibold text-foreground;
+}
+@utility checkbox {
+    @apply size-6 items-center justify-center rounded-md border-2 border-primary-soft;
+}
+@utility checkbox-checked {
+    @apply border-primary bg-primary;
+}
+
+/* ---------- Forms / buttons ---------- */
+@utility field {
+    @apply gap-2;
+}
+@utility field-label {
+    @apply text-sm font-sans-semibold text-foreground;
+}
+@utility field-box {
+    @apply h-14 flex-row items-center rounded-2xl border border-border bg-card px-4;
+}
+@utility field-box-error {
+    @apply border-destructive;
+}
+@utility field-input {
+    @apply flex-1 text-base font-sans-medium text-foreground;
+}
+@utility field-unit {
+    @apply ml-2 text-sm font-sans-medium text-muted-foreground;
+}
+@utility field-error {
+    @apply text-xs font-sans-medium text-destructive;
+}
+@utility button {
+    @apply h-14 flex-row items-center justify-center gap-2 rounded-2xl bg-primary;
+}
+@utility button-disabled {
+    @apply bg-primary/45;
+}
+@utility button-danger {
+    @apply bg-destructive;
+}
+@utility button-text {
+    @apply text-base font-sans-bold text-white;
+}
+@utility button-secondary {
+    @apply h-12 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10;
+}
+@utility button-secondary-text {
+    @apply text-sm font-sans-semibold text-primary;
+}
+@utility seg-track {
+    @apply mt-2 flex-row rounded-xl bg-muted p-1;
+}
+@utility seg-option {
+    @apply h-7 flex-1 items-center justify-center rounded-lg;
+}
+@utility seg-option-active {
+    @apply bg-card;
+}
+@utility seg-text {
+    @apply text-xs font-sans-medium text-muted-foreground;
+}
+@utility seg-text-active {
+    @apply font-sans-bold text-primary;
+}
+@utility radio-grid {
+    @apply flex-row flex-wrap justify-between gap-y-2;
+}
+@utility radio-card {
+    @apply h-12 w-[48.5%] flex-row items-center gap-2 rounded-xl border border-border bg-card px-3;
+}
+@utility radio-card-active {
+    @apply border-primary bg-muted;
+}
+@utility radio-dot {
+    @apply size-4 items-center justify-center rounded-full border border-primary-soft;
+}
+@utility radio-dot-active {
+    @apply border-primary;
+}
+@utility radio-dot-inner {
+    @apply size-2 rounded-full bg-primary;
+}
+@utility radio-text {
+    @apply text-xs font-sans-semibold text-foreground;
+}
+
+/* ---------- Settings ---------- */
+@utility profile-card {
+    @apply mb-4 rounded-3xl border border-border bg-card p-5;
+}
+@utility profile-avatar {
+    @apply size-16 items-center justify-center overflow-hidden rounded-full bg-muted;
+}
+@utility profile-name {
+    @apply text-lg font-sans-bold text-foreground;
+}
+@utility profile-email {
+    @apply text-sm font-sans-medium text-muted-foreground;
+}
+@utility info-row {
+    @apply flex-row items-center justify-between py-2;
+}
+@utility info-label {
+    @apply text-sm font-sans-medium text-muted-foreground;
+}
+@utility info-value {
+    @apply text-sm font-sans-semibold text-foreground;
+}
+
+/* ---------- Nutrition ---------- */
+@utility macro-card {
+    @apply rounded-2xl bg-muted p-4;
+}
+@utility macro-kcal-row {
+    @apply flex-row items-end justify-between;
+}
+@utility macro-kcal {
+    @apply text-4xl font-sans-extrabold text-foreground;
+}
+@utility macro-kcal-unit {
+    @apply ml-1.5 text-sm font-sans-medium text-muted-foreground;
+}
+@utility macro-note {
+    @apply text-[11px] font-sans-medium text-primary;
+}
+@utility macro-row {
+    @apply mt-4 flex-row justify-between;
+}
+@utility macro-value {
+    @apply text-2xl font-sans-extrabold text-foreground;
+}
+@utility macro-label {
+    @apply text-xs font-sans-medium text-muted-foreground;
+}
+@utility meal-card {
+    @apply flex-row items-center gap-3 rounded-2xl border border-border bg-card p-4;
+}
+@utility scan-hero {
+    @apply mt-4 h-52 overflow-hidden rounded-3xl bg-muted;
+}
+@utility scan-badge {
+    @apply flex-row items-center gap-1.5 rounded-full bg-black/60 px-3 py-1;
+}
+@utility scan-badge-text {
+    @apply text-[11px] font-sans-medium text-white;
+}
+@utility serving-box {
+    @apply mt-4 flex-row items-center justify-between rounded-xl border border-border bg-card px-3 py-2.5;
+}
+@utility nutrient-grid {
+    @apply mt-3 flex-row justify-between;
+}
+
+/* ---------- Modal ---------- */
+@utility modal-overlay {
+    @apply flex-1 bg-black/50;
+}
+@utility modal-container {
+    @apply mt-auto max-h-[85%] rounded-t-3xl bg-background;
+}
+@utility modal-header {
+    @apply flex-row items-center justify-between border-b border-border px-5 py-4;
+}
+@utility modal-title {
+    @apply text-xl font-sans-bold text-foreground;
+}
+@utility modal-close {
+    @apply size-8 items-center justify-center rounded-full bg-muted;
+}
+@utility modal-body {
+    @apply gap-5 p-5;
+}
+@utility row-gap {
+    @apply flex-row gap-3;
+}
+
+@layer components {
+
 }

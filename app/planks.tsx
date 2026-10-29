@@ -3,8 +3,8 @@ import { router } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { useApp } from "@/components/app-provider";
 import { Button } from "@/components/button";
-import { ExerciseRow } from "@/components/exercise-row";
-import { ProgressBar } from "@/components/progress-bar";
+import ExerciseRow  from "@/components/ExerciseRow";
+import  ProgressBar from "@/components/ProgressBar";
 import { Screen } from "@/components/screen";
 import { colors } from "@/constants/theme";
 

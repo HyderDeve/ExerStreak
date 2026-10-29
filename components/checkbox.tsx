@@ -1,14 +1,12 @@
+import { icons } from "@/constants/icons";
 import { Ionicons } from "@expo/vector-icons";
+import clsx from "clsx";
 import { View } from "react-native";
 
-export function Checkbox({ checked }: { checked: boolean }) {
-  return (
-    <View
-      className={`h-6 w-6 items-center justify-center rounded-md border-2 ${
-        checked ? "border-brand bg-brand" : "border-brand-soft bg-transparent"
-      }`}
-    >
-      {checked ? <Ionicons name="checkmark" size={16} color="#fff" /> : null}
-    </View>
-  );
-}
+const Checkbox = ({ checked }: { checked: boolean }) => (
+  <View className={clsx("checkbox", checked && "checkbox-checked")}>
+    {checked ? <Ionicons name={icons.check} size={16} color="#fff" /> : null}
+  </View>
+);
+
+export default Checkbox;

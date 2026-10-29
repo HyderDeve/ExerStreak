@@ -3,12 +3,51 @@
     "name": "exerstreak",
     "slug": "exerstreak",
     "version": "1.0.0",
-    "scheme": "exerstreak",
     "orientation": "portrait",
+    "scheme": "exerstreak",
     "userInterfaceStyle": "light",
-    "backgroundColor": "#fff6ee",
-    "ios": { "supportsTablet": false },
-    "android": { "backgroundColor": "#fff6ee" },
-    "plugins": ["expo-router"]
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.example.exerstreak"
+    },
+    "android": {
+      "package": "com.example.exerstreak",
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#fff6ee",
+          "dark": {
+            "backgroundColor": "#fff6ee"
+          }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/PlusJakartaSans-Bold.ttf",
+            "./assets/fonts/PlusJakartaSans-Medium.ttf",
+            "./assets/fonts/PlusJakartaSans-Regular.ttf",
+            "./assets/fonts/PlusJakartaSans-SemiBold.ttf",
+            "./assets/fonts/PlusJakartaSans-ExtraBold.ttf",
+            "./assets/fonts/PlusJakartaSans-Light.ttf"
+          ]
+        }
+      ],
+      "expo-status-bar"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
   }
 }
