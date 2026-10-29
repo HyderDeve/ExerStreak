@@ -1,57 +1,68 @@
-import { router } from "expo-router";
-import { Text, View } from "react-native";
-import { useApp } from "@/components/app-provider";
-import { Logo } from "@/components/logo";
-import { ProgressBar } from "@/components/progress-bar";
-import { RoutineCard } from "@/components/routine-card";
-import { Screen } from "@/components/screen";
-import { StreakCard } from "@/components/streak-card";
+import "@/global.css";
+import ListHeading from "@/components/ListHeading";
+import Logo from "@/components/Logo";
+import ProgressBar from "@/components/ProgressBar";
+import RoutineCard from "@/components/RoutineCard";
+import StreakCard from "@/components/StreakCard";
+import { DAILY_TAGLINE } from "@/constants/data";
+import { useRoutineStore } from "@/lib/routineStore";
+import { useProfile } from "@/lib/useProfile";
+import { computeStreak, formatLongDate, initialOf, routineProgress } from "@/lib/utils";
+import { useRouter } from "expo-router";
+import { styled } from "nativewind";
+import { FlatList, Text, View } from "react-native";
+import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
-export default function Today() {
-  const { profile, streak, planks, routinesDone, routinesTotal, allDone, mobilityDone } = useApp();
-  const planksDone = planks.filter((p) => p.done).length;
-  const date = new Date()
-    .toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })
-    .toUpperCase();
+const SafeAreaView = styled(RNSafeAreaView);
+
+const Today = () => {
+  const router = useRouter();
+  const { displayName } = useProfile();
+  const routines = useRoutineStore((s) => s.routines);
+  const completedDates = useRoutineStore((s) => s.completedDates);
+
+  const streak = computeStreak(completedDates);
+  const doneCount = routines.filter((r) => routineProgress(r).complete).length;
+  const todayDone = doneCount === routines.length;
 
   return (
-    <Screen tabbed>
-      <View className="flex-row items-center justify-between">
-        <Logo />
-        <View className="h-8 w-8 items-center justify-center rounded-full bg-peach">
-          <Text className="text-xs font-semibold text-brand">{profile.name.charAt(0).toUpperCase()}</Text>
-        </View>
-      </View>
+    <SafeAreaView className="screen">
+      <FlatList
+        data={routines}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="pb-30"
+        ItemSeparatorComponent={() => <View className="h-3" />}
+        renderItem={({ item }) => (
+          <RoutineCard
+            routine={item}
+            onPress={() => router.push({ pathname: "/routines/[id]", params: { id: item.id } })}
+          />
+        )}
+        ListHeaderComponent={
+          <>
+            <View className="home-header">
+              <Logo />
+              <View className="home-avatar">
+                <Text className="home-avatar-text">{initialOf(displayName)}</Text>
+              </View>
+            </View>
 
-      <Text className="mt-6 text-xs text-body">{date}</Text>
-      <Text className="mt-1 text-3xl font-bold tracking-tight text-ink">A little stronger, daily.</Text>
+            <Text className="home-date">{formatLongDate()}</Text>
+            <Text className="home-title">{DAILY_TAGLINE}</Text>
 
-      <View className="mt-5">
-        <StreakCard streak={streak} todayDone={allDone} />
-      </View>
+            <StreakCard streak={streak} completedDates={completedDates} todayDone={todayDone} />
 
-      <View className="mt-7 flex-row items-center justify-between">
-        <Text className="text-lg font-bold text-ink">Today’s routines</Text>
-        <Text className="text-xs text-body">
-          {routinesDone} of {routinesTotal} complete
-        </Text>
-      </View>
-      <View className="mt-3">
-        <ProgressBar value={routinesDone / routinesTotal} />
-      </View>
-
-      <View className="mt-4 gap-3">
-        <RoutineCard title="Morning mobility" meta="6 exercises · 8 min" icon="checkmark" done={mobilityDone} />
-        <RoutineCard
-          title="Planks"
-          meta={`${planksDone} of ${planks.length} complete · 5 min`}
-          icon="timer-outline"
-          done={allDone}
-          onPress={() => router.push("/planks")}
-        />
-      </View>
-
-      <Text className="mt-6 text-center text-xs text-body">• Small steps. Stronger habits.</Text>
-    </Screen>
+            <ListHeading title="Today’s routines" meta={`${doneCount} of ${routines.length} complete`} />
+            <View className="mb-4">
+              <ProgressBar value={routines.length ? doneCount / routines.length : 0} />
+            </View>
+          </>
+        }
+        ListFooterComponent={<Text className="footer-note mt-6">• Small steps. Stronger habits.</Text>}
+      />
+    </SafeAreaView>
   );
-}
+};
+
+export default Today;

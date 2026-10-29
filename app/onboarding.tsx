@@ -1,72 +1,108 @@
-import { router } from "expo-router";
+import AppButton from "@/components/AppButton";
+import FormField from "@/components/FormField";
+import Logo from "@/components/Logo";
+import RadioCard from "@/components/RadioCard";
+import SegmentedControl from "@/components/SegmentedControl";
+import { BODY_TYPES } from "@/constants/data";
+import { useProfile } from "@/lib/useProfile";
+import { useRouter } from "expo-router";
+import { styled } from "nativewind";
 import { useState } from "react";
-import { Text, View } from "react-native";
-import { useApp } from "@/components/app-provider";
-import { Button } from "@/components/button";
-import { Field } from "@/components/field";
-import { Logo } from "@/components/logo";
-import { RadioCard } from "@/components/radio-card";
-import { Screen } from "@/components/screen";
-import { Segmented } from "@/components/segmented";
-import { BODY_TYPES, Profile } from "@/constants/data";
+import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from "react-native";
+import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
-export default function Onboarding() {
-  const { profile, setProfile } = useApp();
-  const [form, setForm] = useState<Profile>(profile);
-  const set = <K extends keyof Profile>(k: K, v: Profile[K]) => setForm((f) => ({ ...f, [k]: v }));
+const SafeAreaView = styled(RNSafeAreaView);
 
-  const save = () => {
-    setProfile(form);
-    router.canGoBack() ? router.back() : router.replace("/");
+const Onboarding = () => {
+  const router = useRouter();
+  const { profile, onboarded, saveProfile } = useProfile();
+
+  const [form, setForm] = useState<UserProfile>(
+    profile ?? {
+      name: "",
+      weight: "",
+      weightUnit: "kg",
+      height: "",
+      heightUnit: "cm",
+      age: "",
+      bodyType: "Prefer not to say",
+    },
+  );
+
+  const set = <K extends keyof UserProfile>(key: K, value: UserProfile[K]) =>
+    setForm((current) => ({ ...current, [key]: value }));
+
+  const ageNum = parseInt(form.age, 10);
+  const valid =
+    form.name.trim().length > 0 &&
+    parseFloat(form.weight) > 0 &&
+    form.height.trim().length > 0 &&
+    ageNum >= 10 &&
+    ageNum <= 120;
+
+  const handleContinue = () => {
+    if (!valid) return;
+    saveProfile({ ...form, name: form.name.trim() });
+    if (onboarded && router.canGoBack()) router.back();
+    else router.replace("/(tabs)");
   };
 
   return (
-    <Screen
-      footer={
-        <>
-          <Button label="Continue" onPress={save} />
-          <Text className="mt-3 text-center text-xs text-body">Your pace, your starting point. Edit anytime.</Text>
-        </>
-      }
-    >
-      <View className="flex-row items-center justify-between">
-        <Logo />
-        <Text className="text-xs text-body">Your profile</Text>
-      </View>
-
-      <Text className="mt-8 text-4xl font-bold tracking-tight text-ink">Let’s start with you.</Text>
-      <Text className="mt-2 text-sm text-body">
-        A few details to make your daily movement and nutrition feel more personal.
-      </Text>
-
-      <View className="mt-6 gap-5">
-        <Field label="Your name" value={form.name} onChangeText={(v) => set("name", v)} />
-
-        <View className="flex-row gap-3">
-          <View className="flex-1">
-            <Field label="Current weight" value={form.weight} unit={form.weightUnit} keyboardType="numeric" onChangeText={(v) => set("weight", v)} />
-            <Segmented options={["kg", "lb"] as const} value={form.weightUnit} onChange={(v) => set("weightUnit", v)} />
+    <SafeAreaView className="screen">
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} className="flex-1">
+        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerClassName="pb-6">
+          <View className="home-header">
+            <Logo />
+            <Text className="list-meta">Your profile</Text>
           </View>
-          <View className="flex-1">
-            <Field label="Height" value={form.height} unit={form.heightUnit === "cm" ? "cm" : ""} keyboardType="numeric" onChangeText={(v) => set("height", v)} />
-            <Segmented options={["cm", "ft / in"] as const} value={form.heightUnit} onChange={(v) => set("heightUnit", v)} />
+
+          <Text className="detail-title mt-6">Let’s start with you.</Text>
+          <Text className="detail-copy">A few details to make your daily movement and nutrition feel more personal.</Text>
+
+          <View className="mt-6 gap-5">
+            <FormField label="Your name" value={form.name} onChangeText={(v) => set("name", v)} placeholder="Alex Morgan" autoCapitalize="words" />
+
+            <View className="row-gap">
+              <View className="flex-1">
+                <FormField label="Current weight" value={form.weight} unit={form.weightUnit} keyboardType="decimal-pad" onChangeText={(v) => set("weight", v)} placeholder="68" />
+                <SegmentedControl options={["kg", "lb"] as const} value={form.weightUnit} onChange={(v) => set("weightUnit", v)} />
+              </View>
+              <View className="flex-1">
+                <FormField
+                  label="Height"
+                  value={form.height}
+                  unit={form.heightUnit === "cm" ? "cm" : undefined}
+                  keyboardType={form.heightUnit === "cm" ? "decimal-pad" : "default"}
+                  onChangeText={(v) => set("height", v)}
+                  placeholder={form.heightUnit === "cm" ? "172" : "5'8\""}
+                />
+                <SegmentedControl options={["cm", "ft / in"] as const} value={form.heightUnit} onChange={(v) => set("heightUnit", v)} />
+              </View>
+            </View>
+
+            <FormField label="Age" value={form.age} unit="years" keyboardType="number-pad" maxLength={3} onChangeText={(v) => set("age", v.replace(/[^0-9]/g, ""))} placeholder="28" />
+
+            <View className="field">
+              <View className="flex-row items-center justify-between">
+                <Text className="field-label">Body type</Text>
+                <Text className="list-meta">Optional</Text>
+              </View>
+              <View className="radio-grid">
+                {BODY_TYPES.map((type) => (
+                  <RadioCard key={type} label={type} selected={form.bodyType === type} onPress={() => set("bodyType", type)} />
+                ))}
+              </View>
+            </View>
           </View>
+        </ScrollView>
+
+        <View className="pb-2 pt-2">
+          <AppButton label="Continue" onPress={handleContinue} disabled={!valid} />
+          <Text className="footer-note">Your pace, your starting point. Edit anytime.</Text>
         </View>
-
-        <Field label="Age" value={form.age} unit="years" keyboardType="numeric" onChangeText={(v) => set("age", v)} />
-
-        <View>
-          <View className="mb-2 flex-row items-center justify-between">
-            <Text className="text-sm font-medium text-ink">Body type</Text>
-            <Text className="text-xs text-body">Optional</Text>
-          </View>
-          <View className="flex-row flex-wrap justify-between gap-y-2">
-            {BODY_TYPES.map((b) => (
-              <RadioCard key={b} label={b} selected={form.bodyType === b} onPress={() => set("bodyType", b)} />
-            ))}
-          </View>
-        </View>
-      </View>
-    </Screen>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
-}
+};
+
+export default Onboarding;
