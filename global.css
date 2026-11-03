@@ -39,7 +39,10 @@
 
 /* ---------- Shared ---------- */
 @utility screen {
-    @apply flex-1 bg-background px-5 pt-5;
+    @apply flex-1 bg-background;
+}
+@utility screen-body {
+    @apply flex-1 px-6 pt-5;
 }
 @utility screen-title {
     @apply text-3xl font-sans-bold tracking-tight text-foreground;
@@ -93,50 +96,65 @@
 }
 
 /* ---------- Streak ---------- */
-@utility streak-card {
-    @apply my-5 rounded-3xl bg-muted p-5;
-}
-@utility streak-top {
-    @apply flex-row items-start justify-between;
-}
-@utility streak-label {
-    @apply text-xs font-sans-bold uppercase tracking-[0.5px] text-primary;
+@utility streak-hero {
+    @apply items-center;
 }
 @utility streak-count-row {
-    @apply mt-1 flex-row items-baseline gap-2;
+    @apply -mt-2 flex-row items-end justify-center gap-3;
 }
 @utility streak-count {
-    @apply text-5xl font-sans-extrabold text-foreground;
+    @apply text-7xl font-sans-extrabold leading-[80px] text-primary;
 }
 @utility streak-unit {
-    @apply text-xl font-sans-medium text-muted-foreground;
+    @apply pb-3 text-2xl font-sans-semibold text-foreground;
 }
-@utility streak-flame {
-    @apply size-14 items-center justify-center rounded-full bg-background;
+@utility streak-headline {
+    @apply mt-4 text-lg font-sans-bold text-foreground;
 }
-@utility streak-days {
-    @apply mt-5 flex-row justify-between;
+@utility streak-sub {
+    @apply mt-1 text-sm font-sans-medium text-muted-foreground;
 }
-@utility streak-day {
+@utility week-card {
+    @apply mt-6 rounded-3xl bg-muted p-4;
+}
+@utility week-head {
+    @apply flex-row items-center justify-between;
+}
+@utility week-title {
+    @apply text-base font-sans-bold text-foreground;
+}
+@utility week-range {
+    @apply text-xs font-sans-medium text-muted-foreground;
+}
+@utility week-days {
+    @apply mt-4 flex-row justify-between;
+}
+@utility week-day {
     @apply items-center gap-2;
 }
-@utility streak-day-letter {
-    @apply text-[11px] font-sans-medium text-muted-foreground;
+@utility week-letter {
+    @apply text-xs font-sans-medium text-muted-foreground;
 }
-@utility streak-dot {
-    @apply size-8 items-center justify-center rounded-full border border-primary-soft bg-background;
+@utility week-letter-today {
+    @apply font-sans-bold text-primary;
 }
-@utility streak-dot-done {
-    @apply border-primary bg-primary;
+@utility week-dot {
+    @apply size-9 items-center justify-center rounded-full bg-accent/60;
 }
-@utility streak-dot-today {
-    @apply border-primary;
+@utility week-dot-done {
+    @apply bg-primary;
 }
-@utility streak-dot-text {
-    @apply text-[11px] font-sans-bold text-primary;
+@utility week-dot-today {
+    @apply border-2 border-primary bg-background;
 }
-@utility streak-hint {
-    @apply mt-4 text-xs font-sans-medium text-primary;
+@utility week-pip {
+    @apply size-1.5 rounded-full bg-primary-soft;
+}
+@utility week-pip-today {
+    @apply size-2 bg-primary;
+}
+@utility week-caption {
+    @apply mt-4 text-center text-xs font-sans-medium text-muted-foreground;
 }
 
 /* ---------- Lists / routines ---------- */

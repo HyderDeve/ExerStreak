@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from "react-native";
-import Checkbox from "@/components/Checkbox";
+import Checkbox from "@/components/checkbox";
 
 const ExerciseRow = ({ exercise, onPress }: ExerciseRowProps) => (
   <Pressable onPress={onPress} className="exercise-row" accessibilityRole="checkbox" accessibilityState={{ checked: exercise.done }}>

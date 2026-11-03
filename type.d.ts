@@ -72,8 +72,7 @@ declare global {
         onPress: () => void;
     }
 
-    interface StreakCardProps {
-        streak: number;
+    interface WeekStripProps {
         completedDates: string[];
         todayDone: boolean;
     }

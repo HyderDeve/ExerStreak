@@ -19,7 +19,7 @@ app/
   onboarding.tsx         profile setup (saved to AsyncStorage)
   food-scan.tsx          scan result, serving adjust, add to log
   routines/[id].tsx      routine detail (planks, mobility...)
-  (tabs)/                index (Today), history, nutrition, settings — floating tab bar
+  (tabs)/                index (Today), streak, nutrition, settings — floating tab bar
 components/              PascalCase UI components
 constants/               data, icons, images, theme
 lib/                     utils, zustand stores, useProfile
