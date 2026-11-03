@@ -42,7 +42,7 @@
     @apply flex-1 bg-background;
 }
 @utility screen-body {
-    @apply flex-1 px-6 pt-5;
+    @apply grow px-6 pt-5;
 }
 @utility screen-title {
     @apply text-3xl font-sans-bold tracking-tight text-foreground;

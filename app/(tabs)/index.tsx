@@ -23,7 +23,7 @@ const Today = () => {
 
   return (
     <SafeAreaView className="screen">
-      <View className="screen-body w-full max-w-140 self-center">
+      <View className="screen-body flex-1 w-full max-w-140 self-center">
         <FlatList
           data={routines}
           keyExtractor={(item) => item.id}

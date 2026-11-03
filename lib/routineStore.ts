@@ -13,6 +13,18 @@ const syncToday = (routines: Routine[], dates: string[]) => {
 export const useRoutineStore = create<RoutineStore>((set) => ({
     routines: ROUTINES,
     completedDates: syncToday(ROUTINES, SEED_COMPLETED_DATES),
+    lastActiveDate: dateKey(),
+
+    /** When the local date has changed, clear every done flag. Prior `completedDates` are preserved. */
+    resetIfNewDay: () =>
+        set((state) => {
+            if (state.lastActiveDate === dateKey()) return state;
+            const routines = state.routines.map((r) => ({
+                ...r,
+                exercises: r.exercises.map((e) => ({ ...e, done: false })),
+            }));
+            return { routines, lastActiveDate: dateKey(), completedDates: syncToday(routines, state.completedDates) };
+        }),
 
     toggleExercise: (routineId, exerciseId) =>
         set((state) => {

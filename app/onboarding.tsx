@@ -48,7 +48,7 @@ const Onboarding = () => {
   };
 
   return (
-    <SafeAreaView className="screen">
+    <SafeAreaView className="screen px-6 pt-5">
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} className="flex-1">
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" contentContainerClassName="pb-6">
           <View className="home-header">

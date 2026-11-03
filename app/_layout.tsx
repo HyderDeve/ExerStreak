@@ -1,5 +1,6 @@
 import '@/global.css';
 import { colors } from '@/constants/theme';
+import { useDailyReset } from '@/lib/useDailyReset';
 import { useProfile } from '@/lib/useProfile';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
@@ -11,6 +12,7 @@ SplashScreen.preventAutoHideAsync();
 
 const RootLayoutContent = () => {
   const { hasHydrated } = useProfile();
+  useDailyReset();
 
   const [fontsLoaded] = useFonts({
     'sans-regular': require('../assets/fonts/PlusJakartaSans-Regular.ttf'),

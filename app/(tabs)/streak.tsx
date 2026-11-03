@@ -5,8 +5,9 @@ import WeekStrip from "@/components/WeekStrip";
 import { useRoutineStore } from "@/lib/routineStore";
 import { useProfile } from "@/lib/useProfile";
 import { computeStreak, initialOf, routineProgress } from "@/lib/utils";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { styled } from "nativewind";
+import { useCallback } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -17,6 +18,10 @@ const Streak = () => {
   const { displayName } = useProfile();
   const routines = useRoutineStore((s) => s.routines);
   const completedDates = useRoutineStore((s) => s.completedDates);
+  const resetIfNewDay = useRoutineStore((s) => s.resetIfNewDay);
+
+  // Tabs stay mounted, so re-check the date whenever this tab regains focus.
+  useFocusEffect(useCallback(() => resetIfNewDay(), [resetIfNewDay]));
 
   const streak = computeStreak(completedDates);
   const doneCount = routines.filter((r) => routineProgress(r).complete).length;

@@ -80,6 +80,8 @@ declare global {
     interface RoutineStore {
         routines: Routine[];
         completedDates: string[];
+        lastActiveDate: string;
+        resetIfNewDay: () => void;
         toggleExercise: (routineId: string, exerciseId: string) => void;
         completeNext: (routineId: string) => void;
     }

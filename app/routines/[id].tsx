@@ -29,7 +29,7 @@ const RoutineDetails = () => {
   const streak = computeStreak(completedDates);
 
   return (
-    <SafeAreaView className="screen">
+    <SafeAreaView className="screen px-6 pt-5">
       <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-6">
         <View className="flex-row items-center justify-between">
           <Pressable onPress={() => router.back()} className="back-row">
