@@ -31,7 +31,7 @@ const Planks = () => {
 
   return (
     <SafeAreaView className="screen">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-6">
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-6 screen-body">
         <View className="flex-row items-center justify-between">
           <Pressable onPress={() => router.back()} className="back-row">
             <Ionicons name={icons.back} size={18} color={colors.foreground} />

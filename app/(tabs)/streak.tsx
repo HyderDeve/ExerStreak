@@ -24,7 +24,7 @@ const Streak = () => {
 
   return (
     <SafeAreaView className="screen">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-30">
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-30 screen-body">
         <View className="home-header">
           <Logo />
           <View className="home-avatar">
