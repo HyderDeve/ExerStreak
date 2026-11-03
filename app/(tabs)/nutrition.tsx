@@ -26,7 +26,7 @@ const Nutrition = () => {
         data={today}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        contentContainerClassName="pb-30"
+        contentContainerClassName="pb-30 screen-body"
         ItemSeparatorComponent={() => <View className="h-3" />}
         ListHeaderComponent={
           <View>

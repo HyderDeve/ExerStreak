@@ -39,7 +39,7 @@ const Settings = () => {
 
   return (
     <SafeAreaView className="screen">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-30">
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-30 screen-body">
         <Text className="screen-title mb-6">Settings</Text>
 
         <View className="profile-card">

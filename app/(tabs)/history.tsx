@@ -27,7 +27,7 @@ const History = () => {
         data={sorted}
         keyExtractor={(item) => item}
         showsVerticalScrollIndicator={false}
-        contentContainerClassName="pb-30"
+        contentContainerClassName="pb-30 screen-body"
         ListHeaderComponent={
           <View className="mb-4">
             <Text className="screen-title">History</Text>

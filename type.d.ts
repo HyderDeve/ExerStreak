@@ -72,8 +72,7 @@ declare global {
         onPress: () => void;
     }
 
-    interface StreakCardProps {
-        streak: number;
+    interface WeekStripProps {
         completedDates: string[];
         todayDone: boolean;
     }
@@ -81,6 +80,8 @@ declare global {
     interface RoutineStore {
         routines: Routine[];
         completedDates: string[];
+        lastActiveDate: string;
+        resetIfNewDay: () => void;
         toggleExercise: (routineId: string, exerciseId: string) => void;
         completeNext: (routineId: string) => void;
     }

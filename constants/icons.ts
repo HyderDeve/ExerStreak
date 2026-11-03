@@ -5,9 +5,10 @@ type IconName = ComponentProps<typeof Ionicons>["name"];
 
 export const icons = {
     home: "home-outline",
-    history: "calendar-outline",
+    calender: "calendar-outline",
     nutrition: "restaurant-outline",
-    settings: "person-outline",
+    profile: "person-outline",
+    settings: "settings-outline",
     pulse: "pulse",
     flame: "flame-outline",
     check: "checkmark",
