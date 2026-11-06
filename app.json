@@ -6,14 +6,14 @@
     "orientation": "portrait",
     "scheme": "exerstreak",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    // "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.example.exerstreak"
     },
     "android": {
       "package": "com.example.exerstreak",
-      "edgeToEdgeEnabled": true,
+      // "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
