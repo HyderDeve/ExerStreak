@@ -1,0 +1,50 @@
+{
+    // Run/debug configs for Exerstreak (Expo SDK 58, Expo Go on an Android phone).
+    // Start one from the Run and Debug panel (Ctrl+Shift+D), then scan the QR code
+    // shown in the terminal with the Expo Go app on your phone.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Phone and PC on the same Wi-Fi.
+            "name": "Expo Go: start (Wi-Fi)",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "bunx expo start --go --lan"
+        },
+        {
+            // Use after changing metro.config.js, babel/global.css setup or installing packages.
+            "name": "Expo Go: start (Wi-Fi, clear cache)",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "bunx expo start --go --lan --clear"
+        },
+        {
+            // Works when the phone can't reach the PC (different network, firewall, VPN).
+            // The first run asks to install @expo/ngrok; say yes.
+            "name": "Expo Go: start (tunnel)",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "bunx expo start --go --tunnel"
+        },
+        {
+            // Phone connected by USB with USB debugging on. Forwards the port with adb, then in
+            // Expo Go choose "Enter URL manually" and type: exp://localhost:8081
+            "name": "Expo Go: start (USB)",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "adb reverse tcp:8081 tcp:8081; bunx expo start --go --localhost --port 8081"
+        },
+        {
+            // Needs the "React Native Tools" extension. Start one of the Expo Go configs above,
+            // open the app on the phone, then run this to attach breakpoints (Hermes).
+            "name": "Debug: attach to Hermes",
+            "type": "reactnativedirect",
+            "request": "attach",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
